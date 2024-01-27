@@ -10,6 +10,7 @@ COPY --from=base /usr/local/bin/kubectl /usr/local/bin/kubectl
 COPY --from=base /usr/local/bin/kustomize /usr/local/bin/kustomize
 COPY --from=base /usr/local/bin/saml2aws /usr/local/bin/saml2aws
 COPY --from=base /usr/local/bin/sops /usr/local/bin/sops
-RUN mkdir -p .local/share/helm/plugins
-COPY --from=base /helm/.local/share/helm/plugins /root/.local/share/helm/plugins
+WORKDIR /helm
+ENV HELM_PLUGINS="/helm/.local/share/helm/plugins"
+COPY --from=base /helm/.local/share/helm/plugins /helm/.local/share/helm/plugins
  
