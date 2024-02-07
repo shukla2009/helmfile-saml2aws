@@ -4,6 +4,7 @@ ENV SAML2AWS_VERSION=2.36.13
 RUN wget -c "https://github.com/Versent/saml2aws/releases/download/v${SAML2AWS_VERSION}/saml2aws_${SAML2AWS_VERSION}_linux_${PLATFORM}.tar.gz" -O - | tar -xzv -C /usr/local/bin
 
 FROM amazon/aws-cli:2.15.15
+RUN yum install -y python3
 COPY --from=base /usr/local/bin/helm /usr/local/bin/helm
 COPY --from=base /usr/local/bin/helmfile /usr/local/bin/helmfile
 COPY --from=base /usr/local/bin/kubectl /usr/local/bin/kubectl
